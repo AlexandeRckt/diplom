@@ -179,7 +179,7 @@ if __name__ == '__main__':
           reg_new_user(user_id)
 
       
-      elif msg_text[0:3].lower() == 'Старт':
+       elif msg_text[0:3].lower() == 'Старт':
         try:
           sex, age_to, age_at, city = get_info(user_id)
           
@@ -216,7 +216,7 @@ if __name__ == '__main__':
             msg_text, user_id = loop_bot()
             if msg_text == '0':
                 if i >= len(result) - 1:
-                show_info()
+                  show_info()
             elif msg_text == '1':
               if i >= len(result) - 1:
                 show_info()
@@ -226,7 +226,7 @@ if __name__ == '__main__':
                            result[i][2], current_user_id.id)
                 add_user_photos(user_id, sorted_user_photo[0][1],
                                   sorted_user_photo[0][0], current_user_id.id)
-             except AttributeError:
+              except AttributeError:
                 write_msg(
                   user_id,
                   'Вы не зарегистрировались!\n Введите Vkinder для перезагрузки бота'
@@ -263,3 +263,4 @@ if __name__ == '__main__':
     elif len(msg_text) > 0:
       write_msg(user_id, f'Здравствуйте! '
                          f'\nВведите Vkinder для активации бота.')
+
