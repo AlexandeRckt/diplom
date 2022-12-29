@@ -120,19 +120,17 @@ def check_db_user(ids):
 
 def check_db_black(ids):
   current_users_id = session.query(User).filter_by(vk_id=ids).first()
-  # Находит анкеты из черного списка, добавленные юзером
   all_users = session.query(BlackList).filter_by(
     id_user=current_users_id.id).all()
   return all_users
 
 
-
 def check_db_favorites(ids):
   current_users_id = session.query(User).filter_by(vk_id=ids).first()
-  # Находит все анкеты из избранного, добавленные юзером
   alls_users = session.query(DatingUser).filter_by(
     id_user=current_users_id.id).all()
   return alls_users
+
 
 
 
