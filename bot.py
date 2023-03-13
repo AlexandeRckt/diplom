@@ -131,6 +131,8 @@ def get_info(user_id):
       write_msg(user_id, 'Возраст до:')
       msg_text, user_id = loop_bot()
       age_at = msg_text[0:1]
+  except KeyError:
+    write_msg(user_id, 'Ошибка получения токена.')
 
     sex_user = json_res['response'][0]['sex']
     if sex_user == 1:
@@ -152,8 +154,7 @@ def get_info(user_id):
       city = msg_text[0:len(msg_text)].lower()
 
     return sex, age_to, age_at, city
-  except KeyError:
-    write_msg(user_id, 'Ошибка получения токена.')
+  
 
 
 def input_error():
