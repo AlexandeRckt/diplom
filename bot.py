@@ -181,7 +181,6 @@ if __name__ == '__main__':
 
       
        elif msg_text[0:3].lower() == 'Старт':
-        try:
           sex, age_to, age_at, city = get_info(user_id)
           
           result = search_users(sex, int(age_at), int(age_to), city)
@@ -233,6 +232,7 @@ if __name__ == '__main__':
                   'Вы не зарегистрировались!\n Введите Vkinder для перезагрузки бота'
                 )
                 break
+        try:
             elif msg_text == '2':
               if i >= len(result) - 1:
                 show_info()
