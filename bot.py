@@ -64,7 +64,7 @@ def go_to_favorites(ids):
         write_msg(
           user_ids, f'Это последняя анкета.\n'
           f'Vkinder - вернуться в меню\n')
-    # Удаляет из избранное
+    
     elif msg_texts == '1':
       delete_db_favorites(users.vk_id)
       write_msg(user_ids, f'Анкета удалена.')
@@ -232,7 +232,7 @@ if __name__ == '__main__':
                   'Вы не зарегистрировались!\n Введите Vkinder для перезагрузки бота'
                 )
                 break
-        try:
+           try:
             elif msg_text == '2':
               if i >= len(result) - 1:
                 show_info()
@@ -246,8 +246,8 @@ if __name__ == '__main__':
             else:
               input_error()
               break
-        except Exception:
-          write_msg(user_id, 'Что-то пошло не так.'
+           except Exception:
+            write_msg(user_id, 'Что-то пошло не так.'
                     '\nVkinder - для активации бота.')
 
       
