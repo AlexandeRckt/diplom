@@ -64,7 +64,7 @@ def go_to_favorites(ids):
         write_msg(
           user_ids, f'Это последняя анкета.\n'
           f'Vkinder - вернуться в меню\n')
-    
+
     elif msg_texts == '1':
       delete_db_favorites(users.vk_id)
       write_msg(user_ids, f'Анкета удалена.')
@@ -134,6 +134,7 @@ def get_info(user_id):
   except KeyError:
     write_msg(user_id, 'Ошибка получения токена.')
 
+
     sex_user = json_res['response'][0]['sex']
     if sex_user == 1:
       sex = 2
@@ -154,7 +155,7 @@ def get_info(user_id):
       city = msg_text[0:len(msg_text)].lower()
 
     return sex, age_to, age_at, city
-  
+
 
 
 def input_error():
@@ -180,13 +181,12 @@ if __name__ == '__main__':
           reg_new_user(user_id)
 
       
-       elif msg_text[0:3].lower() == 'Старт':
+      elif msg_text[0:3].lower() == 'Старт':
+        try:
           sex, age_to, age_at, city = get_info(user_id)
-          
           result = search_users(sex, int(age_at), int(age_to), city)
           json_create(result)
           current_user_id = check_db_master(user_id)
-          
           for i in range(len(result)):
             dating_user, blocked_user = check_db_user(result[i][3])
             user_photo = get_photo(result[i][3])
@@ -209,13 +209,13 @@ if __name__ == '__main__':
                 write_msg(user_id,
                             f'фото:',
                             attachment=sorted_user_photo[photo][1])
-              write_msg(
+            write_msg(
               user_id,
               '1 - Добавить, 2 - Заблокировать, 0 - Далее, \nq - выход из поиска'
             )
             msg_text, user_id = loop_bot()
             if msg_text == '0':
-                if i >= len(result) - 1:
+              if i >= len(result) - 1:
                   show_info()
             elif msg_text == '1':
               if i >= len(result) - 1:
@@ -232,7 +232,7 @@ if __name__ == '__main__':
                   'Вы не зарегистрировались!\n Введите Vkinder для перезагрузки бота'
                 )
                 break
-           try:
+
             elif msg_text == '2':
               if i >= len(result) - 1:
                 show_info()
@@ -246,8 +246,8 @@ if __name__ == '__main__':
             else:
               input_error()
               break
-           except Exception:
-            write_msg(user_id, 'Что-то пошло не так.'
+        finally:
+          write_msg(user_id, 'Что-то пошло не так.'
                     '\nVkinder - для активации бота.')
 
       
@@ -264,4 +264,3 @@ if __name__ == '__main__':
     elif len(msg_text) > 0:
       write_msg(user_id, f'Здравствуйте! '
                          f'\nВведите Vkinder для активации бота.')
-
