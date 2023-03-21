@@ -16,7 +16,7 @@ longpoll = VkLongPoll(vk)
 
 
 Base = declarative_base()
-engine = sq.create_engine('postgresql://postgres:ire7land@localhost:5432',
+engine = sq.create_engine('postgresql://postgres:ire7land@localhost:5432/db_vk',
                           client_encoding='utf8')
 
 if not database_exists(engine.url):
@@ -125,12 +125,12 @@ def check_db_black(ids):
   return all_users
 
 
+
 def check_db_favorites(ids):
   current_users_id = session.query(User).filter_by(vk_id=ids).first()
   alls_users = session.query(DatingUser).filter_by(
     id_user=current_users_id.id).all()
   return alls_users
-
 
 
 
