@@ -42,7 +42,7 @@ def search_users(sex, age_at, age_to, city):
       ]
       all_persons.append(person)
     return all_persons
-  except Exception:
+  except IndexError:
       write_msg(user_id, 'Что-то пошло не так.'
                          '\nVkinder - для активации бота.')
 
