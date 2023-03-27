@@ -111,13 +111,16 @@ def go_to_blacklist(ids):
 
 
 def get_info(user_id):
+  try:
   url = 'https://api.vk.com/method/users.get'
   params = {'user_ids': user_id, 'fields': 'bdate,sex,city',
             'access_token': user_token,
             'v': v}
   res = requests.get(url, params=params)
   json_res = res.json()
-  try:
+  except KeyError:
+    write_msg(user_id, 'Ошибка получения токена.')
+  else:  
     if 'bdate' in json_res['response'][0].keys() and \
           len(json_res['response'][0]['bdate']) > 7:
       age_bot_user = int(json_res['response'][0]['bdate'][-4:])
@@ -131,8 +134,7 @@ def get_info(user_id):
       write_msg(user_id, 'Возраст до:')
       msg_text, user_id = loop_bot()
       age_at = msg_text[0:1]
-  except KeyError:
-    write_msg(user_id, 'Ошибка получения токена.')
+  
 
 
     sex_user = json_res['response'][0]['sex']
@@ -181,7 +183,7 @@ if __name__ == '__main__':
           reg_new_user(user_id)
 
       
-      elif msg_text[0:3].lower() == 'Старт':
+      elif msg_text[0:4].lower() == 'cтарт':
         try:
           sex, age_to, age_at, city = get_info(user_id)
           result = search_users(sex, int(age_at), int(age_to), city)
